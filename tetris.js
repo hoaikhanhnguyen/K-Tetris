@@ -33,3 +33,4 @@ const player = {
 };
 
 drawMatrix(matrix, {x:5, y:5});
+//https://www.youtube.com/watch?v=H2aW5V46khA @ 7 minutes
