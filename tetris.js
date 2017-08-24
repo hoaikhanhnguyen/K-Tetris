@@ -79,6 +79,39 @@ function playerMove(dir){
     }
 }
 
+function playerRotate(dir){
+    const pos = player.pos.x;
+    let offset = 1;
+    rotate(player.matrix,dir);
+    while(collide(arena, player)){
+        player.pos.x += offset;
+        offset = -(offset + (offset > 0? 1 : -1));
+        if(offset > player.matrix[0].length){
+            rotate(player.matrix -dir);
+            player.pos.x = pos;
+            return;
+        }
+    }
+}
+
+function rotate(matrix, dir) {
+    for(let y=0;y < matrix.length; ++y){
+        for(let x=0; x<y; ++x){
+            [
+                matrix[x][y],
+                matrix[y][x],
+            ] = [
+                matrix[y][x],
+                matrix[x][y],
+            ]
+        }
+    }
+    if(dir > 0){
+        matrix.forEach(row => row.reverse());
+    }else{
+        matrix.reverse();
+    }
+}
 let dropCounter = 0;
 let dropInterval = 1000;
 
@@ -111,8 +144,12 @@ document.addEventListener('keydown', event =>{
         playerMove(1)
     }else if (event.keyCode === 40){
         playerDrop()
+    }else if(event.keyCode ===81){
+        playerRotate(-1)
+    }else if(event.keyCode ===87){
+        playerRotate(1)
     }
 });
 
 update();
-//https://www.youtube.com/watch?v=H2aW5V46khA @ 24:31
+//https://www.youtube.com/watch?v=H2aW5V46khA @ 32:31 - creating more pieces
