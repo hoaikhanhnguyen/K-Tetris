@@ -131,6 +131,17 @@ function playerDrop(){
     dropCounter =0;
 }
 
+function playerInstantDrop(){
+    if(collide(arena, player)){
+        player.pos.y--;
+        merge(arena, player);
+        playerReset();
+        arenaSweep();
+        updateScore();
+    }
+    dropCounter =0;
+}
+
 function playerMove(dir){
     player.pos.x += dir;
     if(collide(arena, player)){
@@ -233,10 +244,12 @@ document.addEventListener('keydown', event =>{
         playerMove(1)
     }else if (event.keyCode === 40){
         playerDrop()
-    }else if(event.keyCode ===81){
+    }else if(event.keyCode === 81){
         playerRotate(-1)
-    }else if(event.keyCode ===87){
+    }else if(event.keyCode === 87){
         playerRotate(1)
+    }else if(event.keyCode === 38){
+        playerInstantDrop()
     }
 });
 playerReset();
