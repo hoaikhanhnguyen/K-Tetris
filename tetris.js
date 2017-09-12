@@ -131,6 +131,17 @@ function playerDrop(){
     dropCounter =0;
 }
 
+function playerInstantDrop(){
+    if(collide(arena, player)){
+        player.pos.y--;
+        merge(arena, player);
+        playerReset();
+        arenaSweep();
+        updateScore();
+    }
+    dropCounter =0;
+}
+
 function playerMove(dir){
     player.pos.x += dir;
     if(collide(arena, player)){
@@ -233,10 +244,12 @@ document.addEventListener('keydown', event =>{
         playerMove(1)
     }else if (event.keyCode === 40){
         playerDrop()
-    }else if(event.keyCode ===81){
+    }else if(event.keyCode === 81){
         playerRotate(-1)
-    }else if(event.keyCode ===87){
+    }else if(event.keyCode === 87){
         playerRotate(1)
+    }else if(event.keyCode === 38){
+        playerInstantDrop()
     }
 });
 playerReset();
@@ -244,7 +257,6 @@ updateScore();
 update();
 
 //Need to add UP fast drop and save piece
-//https://www.youtube.com/watch?v=H2aW5V46khA
 
 //Two player
 //https://www.youtube.com/watch?v=JJo5JpbuTTs
