@@ -257,7 +257,6 @@ updateScore();
 update();
 
 //Need to add UP fast drop and save piece
-//https://www.youtube.com/watch?v=H2aW5V46khA
 
 //Two player
 //https://www.youtube.com/watch?v=JJo5JpbuTTs
